@@ -42,7 +42,7 @@ public class PlayerShoot : MonoBehaviour
         Vector3 direction = (mouseWorldPos - transform.position).normalized;
 
         // Fixed distance from player to weapon position
-        float radius = 2f; // Adjust orbit radius
+        float radius = 1f; // Adjust orbit radius
         Vector3 gunOffset = direction * radius;
 
         // Place guns around the player

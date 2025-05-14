@@ -23,6 +23,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // Cek jika kena tembok (berdasarkan layer)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // Cek musuh atau player
         if (owner == BulletOwner.Player && other.CompareTag("Enemy"))
         {
             EnemyStats enemyStats = other.GetComponent<EnemyStats>();

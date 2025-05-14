@@ -7,7 +7,7 @@ public class EnemyGunController : MonoBehaviour
 {
     [SerializeField] private Transform gun;
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private float orbitRadius = 2f;
+    [SerializeField] private float orbitRadius = 1f;
 
     private void Update()
     {
