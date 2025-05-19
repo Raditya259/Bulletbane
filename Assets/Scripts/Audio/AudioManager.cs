@@ -64,7 +64,7 @@ public class AudioManager : MonoBehaviour
     {
         if (backgroundMusic == null)
         {
-            Debug.LogWarning("No background music assigned to AudioManager");
+            // Removed Debug.LogWarning
             return;
         }
 
@@ -114,7 +114,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Player shoot sound not assigned in AudioManager");
+            // Removed Debug.LogWarning
         }
     }
     
@@ -128,7 +128,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Enemy shoot sound not assigned in AudioManager");
+            // Removed Debug.LogWarning
         }
     }
 

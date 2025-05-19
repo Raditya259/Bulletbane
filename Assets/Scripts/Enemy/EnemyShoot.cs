@@ -20,11 +20,7 @@ public class EnemyShoot : MonoBehaviour
 
     private void Start()
     {
-        // Check if AudioManager exists and there's no sound assigned there
-        if (AudioManager.Instance != null && shootSFX != null)
-        {
-            Debug.Log("Consider assigning enemy shoot sound in AudioManager instead of EnemyShoot component");
-        }
+        // Removed Debug.Log about AudioManager
     }
 
     private void Update()

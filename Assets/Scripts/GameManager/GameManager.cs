@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
         totalEnemies = allEnemies.Length;
         enemiesDefeated = 0;
         
-        Debug.Log($"Found {totalEnemies} enemies in the scene");
         UpdateEnemyCountUI();
     }
     
@@ -68,8 +67,6 @@ public class GameManager : MonoBehaviour
 
         enemiesDefeated++;
         UpdateEnemyCountUI();
-
-        Debug.Log($"Enemy killed: {enemiesDefeated}/{totalEnemies}");
 
         // Check if all enemies are defeated
         if (enemiesDefeated >= totalEnemies && totalEnemies > 0)
@@ -93,8 +90,6 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         Time.timeScale = 0f;
         if (loseScreen) loseScreen.SetActive(true);
-
-        Debug.Log("GAME OVER - PLAYER DIED");
     }
 
     private void WinGame()
@@ -102,8 +97,6 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         Time.timeScale = 0f;
         if (winScreen) winScreen.SetActive(true);
-
-        Debug.Log("YOU WIN!");
     }
 
     // Button methods for UI

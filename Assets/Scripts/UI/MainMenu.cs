@@ -62,7 +62,6 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         PlayButtonSound();
-        Debug.Log("Quitting game");
 
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

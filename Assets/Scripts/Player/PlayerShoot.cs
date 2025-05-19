@@ -21,12 +21,6 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
-        
-        // Check if AudioManager exists and there's no sound assigned there
-        if (AudioManager.Instance != null && shootSFX != null)
-        {
-            Debug.Log("Consider assigning player shoot sound in AudioManager instead of PlayerShoot component");
-        }
     }
 
     private void Update()

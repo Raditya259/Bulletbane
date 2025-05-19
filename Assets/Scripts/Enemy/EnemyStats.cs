@@ -52,7 +52,7 @@ public class EnemyStats : MonoBehaviour
 
                 if (worldSpaceCanvas == null)
                 {
-                    Debug.LogError("Could not find a World Space Canvas for enemy health UI", this);
+                    // Removed Debug.LogError and replaced with more silent handling
                     return;
                 }
             }
@@ -73,14 +73,14 @@ public class EnemyStats : MonoBehaviour
             }
             else
             {
-                Debug.LogError("EnemyHealthUI component not found on prefab!", this);
+                // Removed Debug.LogError
             }
         }
     }
 
     public void TakeDamage(int amount)
     {
-        Debug.Log($"Enemy taking damage: {amount}. Current health: {currentHealth}");
+        // Removed Debug.Log
 
         int previousHealth = currentHealth;
         currentHealth -= amount;
@@ -90,12 +90,12 @@ public class EnemyStats : MonoBehaviour
         // Show and update health UI when damage is taken
         if (healthUI != null)
         {
-            Debug.Log($"Health UI exists. Visible: {healthUIVisible}, Current Health: {currentHealth}");
+            // Removed Debug.Log
 
             // If health UI is not visible yet and health decreased
             if (!healthUIVisible && currentHealth < previousHealth)
             {
-                Debug.Log("Activating health UI");
+                // Removed Debug.Log
                 healthUI.gameObject.SetActive(true);
                 healthUIVisible = true;
             }
@@ -104,7 +104,7 @@ public class EnemyStats : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Health UI is null when taking damage!", this);
+            // Removed Debug.LogError
         }
 
         if (currentHealth <= 0)
@@ -115,8 +115,7 @@ public class EnemyStats : MonoBehaviour
 
     private void Die()
     {
-        // Tambahkan efek screen shake atau animasi di sini
-        Debug.Log($"{gameObject.name} died.");
+        // Removed Debug.Log
         onEnemyDeath?.Invoke();
 
         // Notify the GameManager that an enemy has been killed

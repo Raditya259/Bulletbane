@@ -31,9 +31,6 @@ public class EnemyHealthUI : MonoBehaviour
         maxHealth = maxHp;
         offset = positionOffset;
 
-        // Debug log to verify initialization
-        Debug.Log($"EnemyHealthUI initialized for {enemy.name} with max health: {maxHp}");
-
         if (healthSlider != null)
         {
             healthSlider.maxValue = maxHealth;

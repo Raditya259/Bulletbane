@@ -63,7 +63,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player died.");
         onPlayerDeath?.Invoke();
         
         // Notify GameManager
