@@ -8,18 +8,23 @@ public class EnemyShoot : MonoBehaviour
     [Header("Shooting Settings")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
-    [SerializeField] private Transform gunTransform; 
+    [SerializeField] private Transform gunTransform;
     [SerializeField] private float bulletSpeed = 10f;
     [SerializeField] private float timeBetweenShots = 1f;
     [SerializeField] private Animator muzzleFlashAnimator;
+
+    // Keep this for backward compatibility and editor assignment
     [SerializeField] private AudioClip shootSFX;
 
     private float lastShotTime;
-    private AudioSource audioSource;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        // Check if AudioManager exists and there's no sound assigned there
+        if (AudioManager.Instance != null && shootSFX != null)
+        {
+            Debug.Log("Consider assigning enemy shoot sound in AudioManager instead of EnemyShoot component");
+        }
     }
 
     private void Update()
@@ -52,9 +57,10 @@ public class EnemyShoot : MonoBehaviour
             muzzleFlashAnimator.SetTrigger("shoot");
         }
 
-        if (shootSFX != null && audioSource != null)
+        // Play shooting sound through AudioManager
+        if (AudioManager.Instance != null)
         {
-            audioSource.PlayOneShot(shootSFX);
+            AudioManager.Instance.PlayEnemyShootSound(transform.position);
         }
     }
 }

@@ -9,10 +9,13 @@ public class GameManager : MonoBehaviour
 
     [Header("Game State")]
     private bool isGameOver = false;
+    private int totalEnemies = 0;
+    private int enemiesDefeated = 0;
 
     [Header("UI References")]
     [SerializeField] private GameObject winScreen;
     [SerializeField] private GameObject loseScreen;
+    [SerializeField] private TMPro.TextMeshProUGUI enemyCountText; // Optional, untuk menampilkan sisa enemy
 
     private void Awake()
     {
@@ -33,16 +36,53 @@ public class GameManager : MonoBehaviour
 
         if (winScreen) winScreen.SetActive(false);
         if (loseScreen) loseScreen.SetActive(false);
+
+        // Count all enemies that are already in the scene at start
+        StartCoroutine(CountInitialEnemiesInScene());
+    }
+
+    private IEnumerator CountInitialEnemiesInScene()
+    {
+        // Wait a frame to ensure all enemies are properly initialized
+        yield return null;
+        
+        // Find all enemies in scene
+        EnemyStats[] allEnemies = FindObjectsOfType<EnemyStats>();
+        totalEnemies = allEnemies.Length;
+        enemiesDefeated = 0;
+        
+        Debug.Log($"Found {totalEnemies} enemies in the scene");
+        UpdateEnemyCountUI();
+    }
+    
+    // Register a single enemy (used when enemies spawn one by one)
+    public void RegisterEnemy()
+    {
+        totalEnemies++;
+        UpdateEnemyCountUI();
     }
 
     public void OnEnemyKilled()
     {
         if (isGameOver) return;
 
-        int enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        if (enemiesLeft <= 1) // karena enemy ini belum di-destroy ketika dipanggil
+        enemiesDefeated++;
+        UpdateEnemyCountUI();
+
+        Debug.Log($"Enemy killed: {enemiesDefeated}/{totalEnemies}");
+
+        // Check if all enemies are defeated
+        if (enemiesDefeated >= totalEnemies && totalEnemies > 0)
         {
             WinGame();
+        }
+    }
+
+    private void UpdateEnemyCountUI()
+    {
+        if (enemyCountText != null)
+        {
+            enemyCountText.text = $"Enemies: {totalEnemies - enemiesDefeated}/{totalEnemies}";
         }
     }
 
@@ -66,16 +106,18 @@ public class GameManager : MonoBehaviour
         Debug.Log("YOU WIN!");
     }
 
-    // Opsional: tombol UI
+    // Button methods for UI
     public void RestartGame()
     {
         Time.timeScale = 1f;
+        isGameOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
+        isGameOver = false;
         SceneManager.LoadScene("MainMenu");
     }
 }

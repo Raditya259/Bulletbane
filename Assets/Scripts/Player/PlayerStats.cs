@@ -65,6 +65,13 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log("Player died.");
         onPlayerDeath?.Invoke();
+        
+        // Notify GameManager
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnPlayerDied();
+        }
+        
         gameObject.SetActive(false);
     }
 

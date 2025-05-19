@@ -30,6 +30,9 @@ public class EnemyStats : MonoBehaviour
 
     private void Start()
     {
+        // No need to register with GameManager manually anymore
+        // GameManager will find all EnemyStats components in the scene
+
         // Create health UI for this enemy but keep it hidden initially
         if (healthUIPrefab != null)
         {
@@ -115,6 +118,12 @@ public class EnemyStats : MonoBehaviour
         // Tambahkan efek screen shake atau animasi di sini
         Debug.Log($"{gameObject.name} died.");
         onEnemyDeath?.Invoke();
+
+        // Notify the GameManager that an enemy has been killed
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnEnemyKilled();
+        }
 
         // Destroy the health UI
         if (healthUI != null)

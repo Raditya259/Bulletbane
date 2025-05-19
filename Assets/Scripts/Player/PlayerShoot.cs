@@ -10,17 +10,23 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private float bulletSpeed = 20f;
     [SerializeField] private float timeBetweenShots = 0.1f;
     [SerializeField] private Animator muzzleFlashAnimator;
+    
+    // Keep this for backward compatibility and editor assignment
     [SerializeField] private AudioClip shootSFX;
 
     private float lastShotTime = 0f;
     private bool isFiring = false;
-    private AudioSource audioSource;
     private Camera cam;
 
     private void Start()
     {
         cam = Camera.main;
-        audioSource = GetComponent<AudioSource>();
+        
+        // Check if AudioManager exists and there's no sound assigned there
+        if (AudioManager.Instance != null && shootSFX != null)
+        {
+            Debug.Log("Consider assigning player shoot sound in AudioManager instead of PlayerShoot component");
+        }
     }
 
     private void Update()
@@ -84,10 +90,12 @@ public class PlayerShoot : MonoBehaviour
             muzzleFlashAnimator.SetTrigger("shoot");
         }
 
-        // Shoot sound
-        if (shootSFX != null && audioSource != null)
+        // Play shooting sound through AudioManager
+        if (AudioManager.Instance != null)
         {
-            audioSource.PlayOneShot(shootSFX);
+            AudioManager.Instance.PlayPlayerShootSound(transform.position);
         }
+        
+        // No need to play the sound directly anymore
     }
 }
