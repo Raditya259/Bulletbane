@@ -1,2 +1,3 @@
 # Bulletbane
-Game Jam #1 Bullet Hell
+Game Jam #1 Pixel Game Jam
+
