@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Music")]
     [SerializeField] private AudioClip backgroundMusic;
-    [SerializeField] [Range(0f, 1f)] private float musicVolume = 0.5f;
+    [SerializeField][Range(0f, 1f)] private float musicVolume = 0.5f;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip victorySound;
@@ -17,10 +17,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip enemyShootSound;
 
     [Header("Volume Settings")]
-    [SerializeField] [Range(0f, 1f)] private float sfxVolume = 0.8f;
-    [SerializeField] [Range(0f, 1f)] private float playerShootVolume = 0.7f;
-    [SerializeField] [Range(0f, 1f)] private float enemyShootVolume = 0.6f;
-    [SerializeField] [Range(-0.3f, 0.3f)] private float pitchVariation = 0.1f;
+    [SerializeField][Range(0f, 1f)] private float sfxVolume = 0.8f;
+    [SerializeField][Range(0f, 1f)] private float playerShootVolume = 0.7f;
+    [SerializeField][Range(0f, 1f)] private float enemyShootVolume = 0.6f;
+    [SerializeField][Range(-0.3f, 0.3f)] private float pitchVariation = 0.1f;
 
     private AudioSource musicSource;
     private AudioSource sfxSource;
@@ -104,7 +104,7 @@ public class AudioManager : MonoBehaviour
             sfxSource.PlayOneShot(defeatSound, sfxVolume);
         }
     }
-    
+
     public void PlayPlayerShootSound(Vector3 position)
     {
         if (playerShootSound != null)
@@ -117,7 +117,7 @@ public class AudioManager : MonoBehaviour
             // Removed Debug.LogWarning
         }
     }
-    
+
     public void PlayEnemyShootSound(Vector3 position)
     {
         if (enemyShootSound != null)
@@ -137,19 +137,19 @@ public class AudioManager : MonoBehaviour
         musicVolume = Mathf.Clamp01(volume);
         musicSource.volume = musicVolume;
     }
-    
+
     public void SetSFXVolume(float volume)
     {
         sfxVolume = Mathf.Clamp01(volume);
         sfxSource.volume = sfxVolume;
         // Shooting volume will scale with master SFX volume
     }
-    
+
     public void SetPlayerShootVolume(float volume)
     {
         playerShootVolume = Mathf.Clamp01(volume);
     }
-    
+
     public void SetEnemyShootVolume(float volume)
     {
         enemyShootVolume = Mathf.Clamp01(volume);

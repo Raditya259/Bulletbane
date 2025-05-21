@@ -10,7 +10,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private float bulletSpeed = 20f;
     [SerializeField] private float timeBetweenShots = 0.1f;
     [SerializeField] private Animator muzzleFlashAnimator;
-    
+
     // Keep this for backward compatibility and editor assignment
     [SerializeField] private AudioClip shootSFX;
 
@@ -89,7 +89,7 @@ public class PlayerShoot : MonoBehaviour
         {
             AudioManager.Instance.PlayPlayerShootSound(transform.position);
         }
-        
+
         // No need to play the sound directly anymore
     }
 }

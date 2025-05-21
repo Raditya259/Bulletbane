@@ -45,15 +45,15 @@ public class GameManager : MonoBehaviour
     {
         // Wait a frame to ensure all enemies are properly initialized
         yield return null;
-        
+
         // Find all enemies in scene
         EnemyStats[] allEnemies = FindObjectsOfType<EnemyStats>();
         totalEnemies = allEnemies.Length;
         enemiesDefeated = 0;
-        
+
         UpdateEnemyCountUI();
     }
-    
+
     // Register a single enemy (used when enemies spawn one by one)
     public void RegisterEnemy()
     {
